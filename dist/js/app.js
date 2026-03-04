@@ -364,7 +364,6 @@ function initHotspots() {
          const card = hotspot.querySelector('.hotspot__card');
          if (!card) return;
 
-         // только установка дефолта, без блокировки кликов
          card.classList.toggle('show', !isMobile);
       });
    }
@@ -383,6 +382,53 @@ function initHotspots() {
 }
 
 
+/*==========================================================================
+Carousel sliders
+============================================================================*/
+/*==========================================================================
+Products slider
+============================================================================*/
+function initProductsCarousel() {
+   const sliders = document.querySelectorAll('.carousel');
+
+   if (!sliders.length) return;
+
+   sliders.forEach((carousel) => {
+      const sliderEl = carousel.querySelector('.carousel__slider');
+      const prevEl = carousel.querySelector('.carousel__prev');
+      const nextEl = carousel.querySelector('.carousel__next');
+
+      if (!sliderEl) return;
+
+      new Swiper(sliderEl, {
+         slidesPerView: 4,
+         loop: false,
+         speed: 1000,
+         navigation: {
+            prevEl,
+            nextEl,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 1.05,
+               spaceBetween: 20,
+            },
+            600: {
+               slidesPerView: 2,
+               spaceBetween: 15,
+            },
+            900: {
+               slidesPerView: 3,
+               spaceBetween: 15,
+            },
+            1200: {
+               slidesPerView: 4,
+               spaceBetween: 26,
+            }
+         }
+      });
+   });
+}
 
 
 /*==========================================================================
@@ -391,7 +437,7 @@ Init
 document.addEventListener("DOMContentLoaded", () => {
    heroSlider();
    initHotspots();
-
+   initProductsCarousel();
 })
 })();
 
