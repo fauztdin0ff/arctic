@@ -322,6 +322,32 @@ function init() {
 } */
 
 /*==========================================================================
+Fix header
+============================================================================*/
+const header = document.querySelector('header');
+
+const fxPoint = window.innerHeight * 0.7;  // 70vh
+const showPoint = window.innerHeight;      // 100vh
+
+window.addEventListener('scroll', () => {
+   const scroll = window.scrollY;
+
+   // фиксируем раньше
+   if (scroll >= fxPoint) {
+      header.classList.add('-fx');
+   } else {
+      header.classList.remove('-fx', 'show');
+   }
+
+   // показываем позже
+   if (scroll >= showPoint) {
+      header.classList.add('show');
+   } else {
+      header.classList.remove('show');
+   }
+});
+
+/*==========================================================================
 Hero slider
 ============================================================================*/
 function heroSlider() {
