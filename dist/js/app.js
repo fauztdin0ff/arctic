@@ -326,20 +326,18 @@ Fix header
 ============================================================================*/
 const header = document.querySelector('header');
 
-const fxPoint = window.innerHeight * 0.7;  // 70vh
-const showPoint = window.innerHeight;      // 100vh
+const fxPoint = window.innerHeight * 0.7;
+const showPoint = window.innerHeight;
 
 window.addEventListener('scroll', () => {
    const scroll = window.scrollY;
 
-   // фиксируем раньше
    if (scroll >= fxPoint) {
       header.classList.add('-fx');
    } else {
       header.classList.remove('-fx', 'show');
    }
 
-   // показываем позже
    if (scroll >= showPoint) {
       header.classList.add('show');
    } else {
@@ -695,6 +693,62 @@ function scrollToTop(duration = 400) {
 goTopBtn.addEventListener('click', () => {
    scrollToTop(400);
 });
+
+
+/*==========================================================================
+FIlters groups
+============================================================================*/
+function initFiltersAccordion() {
+   const groups = document.querySelectorAll('.filters__group');
+
+   groups.forEach(group => {
+      const title = group.querySelector('.filters__title');
+      const items = group.querySelector('.filters__items');
+
+      title.addEventListener('click', () => {
+
+         if (group.classList.contains('opened')) {
+            // закрытие
+            items.style.maxHeight = items.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+               items.style.maxHeight = '0px';
+            });
+            group.classList.remove('opened');
+         } else {
+            // открытие
+            group.classList.add('opened');
+            items.style.maxHeight = items.scrollHeight + 'px';
+         }
+
+      });
+   });
+}
+
+/*==========================================================================
+Toggle filter
+============================================================================*/
+function initCategoryAside() {
+   const filterToggle = document.querySelector('.filter-toggle');
+   const categoryAside = document.querySelector('.category__aside');
+   const body = document.body;
+   const filtersClose = document.querySelector('.filters__close');
+
+   if (!filterToggle || !categoryAside) return;
+
+   filterToggle.addEventListener('click', () => {
+      categoryAside.classList.add('active');
+      body.classList.add('bg');
+   });
+
+   if (filtersClose) {
+      filtersClose.addEventListener('click', () => {
+         categoryAside.classList.remove('active');
+         body.classList.remove('bg');
+      });
+   }
+}
+
+
 /*==========================================================================
 Init
 ============================================================================*/
@@ -705,6 +759,8 @@ document.addEventListener("DOMContentLoaded", () => {
    initFaqAccordion();
    initDropdowns();
    requestFormGroups();
+   initFiltersAccordion();
+   initCategoryAside();
 
 })
 })();
