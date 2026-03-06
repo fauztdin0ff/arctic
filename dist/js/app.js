@@ -432,12 +432,241 @@ function initProductsCarousel() {
 
 
 /*==========================================================================
+faq
+============================================================================*/
+function initFaqAccordion() {
+   const faqItems = document.querySelectorAll('.faq__item');
+   if (!faqItems.length) return;
+
+   faqItems.forEach(item => {
+      const question = item.querySelector('.faq__question');
+      const answer = item.querySelector('.faq__answer');
+
+      if (!question || !answer || item.dataset.inited) return;
+
+      question.addEventListener('click', () => {
+         const isActive = item.classList.contains('active');
+
+         faqItems.forEach(el => {
+            const elAnswer = el.querySelector('.faq__answer');
+            if (!elAnswer) return;
+
+            el.classList.remove('active');
+            elAnswer.style.maxHeight = null;
+         });
+
+         if (!isActive) {
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+         }
+      });
+
+      item.dataset.inited = 'true';
+   });
+}
+
+
+/*==========================================================================
+Dropdowns
+============================================================================*/
+function initDropdowns() {
+   const dropdowns = document.querySelectorAll('.dropdown');
+
+   dropdowns.forEach(dropdown => {
+      const button = dropdown.querySelector('.dropdown__button');
+      const buttonText = dropdown.querySelector('.dropdown__button-text');
+      const list = dropdown.querySelector('.dropdown__list');
+      const items = dropdown.querySelectorAll('.dropdown__item');
+      const closeBtn = dropdown.querySelector('.dropdown__list-close');
+
+      button.addEventListener('click', (e) => {
+         e.stopPropagation();
+
+         const isOpen = button.classList.contains('active');
+
+         closeAllDropdowns();
+
+         if (!isOpen) {
+            openDropdown(button, list);
+         }
+      });
+
+      items.forEach(item => {
+         item.addEventListener('click', () => {
+            const text = item.querySelector('span').textContent;
+
+            buttonText.textContent = text;
+            dropdown.classList.add('dropdown--selected');
+
+            closeAllDropdowns();
+         });
+      });
+
+      if (closeBtn) {
+         closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllDropdowns();
+         });
+      }
+   });
+
+   function openDropdown(button, list) {
+      button.classList.add('active');
+      list.classList.add('show');
+      document.body.classList.add('no-scroll');
+   }
+
+   function closeAllDropdowns() {
+      document.querySelectorAll('.dropdown__button.active')
+         .forEach(btn => btn.classList.remove('active'));
+
+      document.querySelectorAll('.dropdown__list.show')
+         .forEach(list => list.classList.remove('show'));
+
+      document.body.classList.remove('no-scroll');
+   }
+
+   document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+         closeAllDropdowns();
+      }
+   });
+
+   document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+         closeAllDropdowns();
+      }
+   });
+}
+
+/*==========================================================================
+Form groups
+============================================================================*/
+function requestFormGroups() {
+   const forms = document.querySelectorAll('.request__form-col');
+
+   forms.forEach(form => {
+      const items = form.querySelectorAll('.dropdown__item');
+      const additionals = form.querySelectorAll('.request__form-additional');
+
+      items.forEach(item => {
+         item.addEventListener('click', () => {
+            const group = item.dataset.formGroup;
+
+            additionals.forEach(el => el.classList.remove('active'));
+
+            const target = form.querySelector(`.request__form-additional[data-form-group="${group}"]`);
+            if (target) {
+               target.classList.add('active');
+            }
+         });
+      });
+   });
+}
+
+
+/*==========================================================================
+Form validate
+============================================================================*/
+function validateArea(area) {
+
+   const additional = area.closest('.request__form-additional');
+
+   // если поле внутри additional и он не активен — пропускаем
+   if (additional && !additional.classList.contains('active')) {
+      area.classList.remove('no-valid');
+      return true;
+   }
+
+   let valid = true;
+
+   const input = area.querySelector('input:not([type="checkbox"])');
+   const textarea = area.querySelector('textarea');
+   const checkbox = area.querySelector('input[type="checkbox"]');
+   const dropdown = area.querySelector('.dropdown');
+
+   // input
+   if (input) {
+      const hasValue = input.value.trim().length > 0;
+      area.classList.toggle('has-value', hasValue);
+
+      if (!hasValue) valid = false;
+   }
+
+   // textarea
+   if (textarea) {
+      const hasValue = textarea.value.trim().length > 0;
+      area.classList.toggle('has-value', hasValue);
+
+      if (!hasValue) valid = false;
+   }
+
+   // checkbox
+   if (checkbox) {
+      if (!checkbox.checked) valid = false;
+   }
+
+   // dropdown
+   if (dropdown) {
+      if (!dropdown.classList.contains('dropdown--selected')) valid = false;
+   }
+
+   area.classList.toggle('no-valid', !valid);
+
+   return valid;
+}
+
+function validateRequestForm(form) {
+   let isValid = true;
+
+   const areas = form.querySelectorAll('[data-area="required"]');
+
+   areas.forEach(area => {
+      if (!validateArea(area)) {
+         isValid = false;
+      }
+   });
+
+   return isValid;
+}
+
+/*==========================================================================
+Check request form
+============================================================================*/
+const form = document.querySelector('.request__form');
+
+form.addEventListener('submit', e => {
+   if (!validateRequestForm(form)) {
+      e.preventDefault();
+   }
+});
+
+document.addEventListener('input', e => {
+   if (e.target.matches('.request__form input, .request__form textarea')) {
+      const area = e.target.closest('[data-area="required"]');
+      if (area) validateArea(area);
+   }
+});
+
+document.addEventListener('change', e => {
+   if (e.target.matches('.request__form input[type="checkbox"]')) {
+      const area = e.target.closest('[data-area="required"]');
+      if (area) validateArea(area);
+   }
+});
+
+
+/*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener("DOMContentLoaded", () => {
    heroSlider();
    initHotspots();
    initProductsCarousel();
+   initFaqAccordion();
+   initDropdowns();
+   requestFormGroups();
+
 })
 })();
 
