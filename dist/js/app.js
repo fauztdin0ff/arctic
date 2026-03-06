@@ -636,6 +636,39 @@ document.addEventListener('change', e => {
    }
 });
 
+
+/*==========================================================================
+Go top
+============================================================================*/
+const goTopBtn = document.querySelector('.footer__go-top-btn');
+
+function scrollToTop(duration = 400) {
+   const start = window.scrollY;
+   const startTime = performance.now();
+
+   function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+   }
+
+   function scroll() {
+      const now = performance.now();
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+
+      window.scrollTo(0, start * (1 - easedProgress));
+
+      if (progress < 1) {
+         requestAnimationFrame(scroll);
+      }
+   }
+
+   requestAnimationFrame(scroll);
+}
+
+goTopBtn.addEventListener('click', () => {
+   scrollToTop(400);
+});
 /*==========================================================================
 Init
 ============================================================================*/
