@@ -435,6 +435,11 @@ Form elements
     background: rgba(40, 246, 188, 0.1);
   }
 }
+@media (width < 767px) {
+  .dropdown__button {
+    font-size: 16px;
+  }
+}
 .dropdown__button-icon {
   flex: 0 0 18px;
   width: 18px;
@@ -2256,6 +2261,11 @@ Request
     flex-direction: column;
   }
 }
+@media (width < 767px) {
+  .request__form {
+    gap: 10px;
+  }
+}
 .request__form-col {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
@@ -2270,6 +2280,11 @@ Request
     display: flex;
     flex-direction: column;
     gap: 15px;
+  }
+}
+@media (width < 767px) {
+  .request__form-col {
+    gap: 10px;
   }
 }
 .request__form-area {
