@@ -572,11 +572,7 @@ function validateArea(area) {
 
    const additional = area.closest('.request__form-additional');
 
-   // если поле внутри additional и он не активен — пропускаем
-   if (additional && !additional.classList.contains('active')) {
-      area.classList.remove('no-valid');
-      return true;
-   }
+   const skipRequired = additional && !additional.classList.contains('active');
 
    let valid = true;
 
@@ -585,33 +581,22 @@ function validateArea(area) {
    const checkbox = area.querySelector('input[type="checkbox"]');
    const dropdown = area.querySelector('.dropdown');
 
-   // input
-   if (input) {
-      const hasValue = input.value.trim().length > 0;
-      area.classList.toggle('has-value', hasValue);
-
-      if (!hasValue) valid = false;
+   const field = input || textarea;
+   if (field) {
+      area.classList.toggle('has-value', field.value.trim().length > 0);
    }
 
-   // textarea
-   if (textarea) {
-      const hasValue = textarea.value.trim().length > 0;
-      area.classList.toggle('has-value', hasValue);
+   // ---- required валидация ----
+   if (!skipRequired) {
+      if (input && !input.value.trim()) valid = false;
+      if (textarea && !textarea.value.trim()) valid = false;
+      if (checkbox && !checkbox.checked) valid = false;
+      if (dropdown && !dropdown.classList.contains('dropdown--selected')) valid = false;
 
-      if (!hasValue) valid = false;
+      area.classList.toggle('no-valid', !valid);
+   } else {
+      area.classList.remove('no-valid');
    }
-
-   // checkbox
-   if (checkbox) {
-      if (!checkbox.checked) valid = false;
-   }
-
-   // dropdown
-   if (dropdown) {
-      if (!dropdown.classList.contains('dropdown--selected')) valid = false;
-   }
-
-   area.classList.toggle('no-valid', !valid);
 
    return valid;
 }
@@ -619,7 +604,7 @@ function validateArea(area) {
 function validateRequestForm(form) {
    let isValid = true;
 
-   const areas = form.querySelectorAll('[data-area="required"]');
+   const areas = form.querySelectorAll('.request__form-area, .agree');
 
    areas.forEach(area => {
       if (!validateArea(area)) {
@@ -630,31 +615,26 @@ function validateRequestForm(form) {
    return isValid;
 }
 
-/*==========================================================================
-Check request form
-============================================================================*/
+/* --- submit --- */
 const form = document.querySelector('.request__form');
-
 form.addEventListener('submit', e => {
-   if (!validateRequestForm(form)) {
-      e.preventDefault();
-   }
+   if (!validateRequestForm(form)) e.preventDefault();
 });
 
+/* --- live проверка --- */
 document.addEventListener('input', e => {
    if (e.target.matches('.request__form input, .request__form textarea')) {
-      const area = e.target.closest('[data-area="required"]');
+      const area = e.target.closest('.request__form-area');
       if (area) validateArea(area);
    }
 });
 
 document.addEventListener('change', e => {
    if (e.target.matches('.request__form input[type="checkbox"]')) {
-      const area = e.target.closest('[data-area="required"]');
+      const area = e.target.closest('.request__form-area, .agree');
       if (area) validateArea(area);
    }
 });
-
 
 /*==========================================================================
 Init
