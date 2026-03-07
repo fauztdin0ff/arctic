@@ -863,6 +863,28 @@ function initGallerySlider() {
    return swipers;
 }
 
+
+/*==========================================================================
+Marque slider
+============================================================================*/
+const marqueSlider = document.querySelector(".dealers__slider");
+
+if (marqueSlider) {
+   const brandsSwiper = new Swiper(marqueSlider, {
+      slidesPerView: "auto",
+      spaceBetween: 60,
+      loop: true,
+      freeMode: true,
+      simulateTouch: false,
+      slideToClickedSlide: false,
+      speed: 3000,
+      autoplay: {
+         delay: 0,
+         disableOnInteraction: false,
+      },
+   });
+}
+
 /*==========================================================================
 Init
 ============================================================================*/
