@@ -593,9 +593,7 @@ function requestFormGroups() {
 Form validate
 ============================================================================*/
 function validateArea(area) {
-
    const additional = area.closest('.request__form-additional');
-
    const skipRequired = additional && !additional.classList.contains('active');
 
    let valid = true;
@@ -611,7 +609,9 @@ function validateArea(area) {
    }
 
    // ---- required валидация ----
-   if (!skipRequired) {
+   const isRequired = area.dataset.area === 'required';
+
+   if (!skipRequired && isRequired) {
       if (input && !input.value.trim()) valid = false;
       if (checkbox && !checkbox.checked) valid = false;
       if (dropdown && !dropdown.classList.contains('dropdown--selected')) valid = false;
