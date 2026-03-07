@@ -613,7 +613,6 @@ function validateArea(area) {
    // ---- required валидация ----
    if (!skipRequired) {
       if (input && !input.value.trim()) valid = false;
-      if (textarea && !textarea.value.trim()) valid = false;
       if (checkbox && !checkbox.checked) valid = false;
       if (dropdown && !dropdown.classList.contains('dropdown--selected')) valid = false;
 
