@@ -750,6 +750,61 @@ function initCategoryAside() {
 
 
 /*==========================================================================
+Product sliders
+============================================================================*/
+function initProductGallerySlider() {
+   const productGallerySliderThumbs = document.querySelector('.product__gallery-slider-thumbs');
+   const productGallerySliderBig = document.querySelector('.product__gallery-slider-big');
+
+   if (!productGallerySliderThumbs || !productGallerySliderBig) return;
+
+   const productSwiperThumbs = new Swiper(productGallerySliderThumbs, {
+      spaceBetween: 10,
+      speed: 600,
+      slidesPerView: 5
+   });
+
+   const productSwiperBig = new Swiper(productGallerySliderBig, {
+      spaceBetween: 0,
+      slidesPerView: 1,
+      speed: 600,
+      thumbs: {
+         swiper: productSwiperThumbs,
+      }
+   });
+}
+
+/*==========================================================================
+Gallery
+============================================================================*/
+const lightbox = GLightbox({
+   selector: '.glightbox'
+});
+
+
+/*==========================================================================
+Videos
+============================================================================*/
+function initVideoPlayers() {
+   const players = document.querySelectorAll('.video-player');
+   if (!players.length) return;
+
+   players.forEach(player => {
+      const video = player.querySelector('video');
+      const button = player.querySelector('.video-player__button');
+
+      if (!video || !button) return;
+
+      button.addEventListener('click', () => {
+         player.classList.add('is-playing');
+         video.setAttribute('controls', '');
+         video.play();
+      });
+   });
+}
+
+
+/*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -761,7 +816,8 @@ document.addEventListener("DOMContentLoaded", () => {
    requestFormGroups();
    initFiltersAccordion();
    initCategoryAside();
-
+   initProductGallerySlider();
+   initVideoPlayers()
 })
 })();
 
