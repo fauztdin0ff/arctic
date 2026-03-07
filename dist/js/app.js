@@ -398,17 +398,26 @@ function initHotspots() {
       if (!dot || !card) return;
 
       dot.addEventListener('click', () => {
+         const isMobile = window.innerWidth <= mobileBreakpoint;
+
+         if (isMobile) {
+            hotspots.forEach(h => {
+               const c = h.querySelector('.hotspot__card');
+               if (c && c !== card) {
+                  c.classList.remove('show');
+               }
+            });
+         }
+
          card.classList.toggle('show');
       });
    });
 
    setDefaultState();
+   window.addEventListener('resize', setDefaultState);
 }
 
 
-/*==========================================================================
-Carousel sliders
-============================================================================*/
 /*==========================================================================
 Products slider
 ============================================================================*/
