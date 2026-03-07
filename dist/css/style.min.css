@@ -3190,7 +3190,12 @@ Product
   margin-top: 10px;
   min-width: 0;
   width: 100%;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
+}
+@media (width < 600px) {
+  .product__gallery-slider-thumbs {
+    max-height: 68px;
+  }
 }
 .product__gallery-item-small {
   border-radius: 12px;
