@@ -813,6 +813,57 @@ function initVideoPlayers() {
 
 
 /*==========================================================================
+Article gallery
+============================================================================*/
+function initGallerySlider() {
+   const galleries = document.querySelectorAll('.article__gallery');
+
+   if (!galleries.length) return;
+
+   const swipers = [];
+
+   galleries.forEach(gallery => {
+      const slider = gallery.querySelector('.article__gallery-slider');
+      const prev = gallery.querySelector('.article__gallery-prev');
+      const next = gallery.querySelector('.article__gallery-next');
+
+      if (!slider) return;
+
+      const swiper = new Swiper(slider, {
+         loop: false,
+         spaceBetween: 10,
+         speed: 600,
+         navigation: {
+            prevEl: prev,
+            nextEl: next,
+         },
+         breakpoints: {
+            320: {
+               slidesPerView: 1.05,
+               spaceBetween: 20,
+            },
+            600: {
+               slidesPerView: 2,
+               spaceBetween: 15,
+            },
+            900: {
+               slidesPerView: 3,
+               spaceBetween: 15,
+            },
+            1200: {
+               slidesPerView: 3,
+               spaceBetween: 26,
+            }
+         }
+      });
+
+      swipers.push(swiper);
+   });
+
+   return swipers;
+}
+
+/*==========================================================================
 Init
 ============================================================================*/
 document.addEventListener("DOMContentLoaded", () => {
@@ -825,7 +876,8 @@ document.addEventListener("DOMContentLoaded", () => {
    initFiltersAccordion();
    initCategoryAside();
    initProductGallerySlider();
-   initVideoPlayers()
+   initVideoPlayers();
+   initGallerySlider();
 })
 })();
 
