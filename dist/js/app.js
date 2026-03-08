@@ -2661,10 +2661,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.isWebp();
 _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.burgerMenu();
 _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.popups();
-_modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.phoneMask();
 
 
 /*==========================================================================
@@ -2686,31 +2684,6 @@ smoothElements.forEach(el => {
    render();
 });
 
-/*==========================================================================
-Observer Animation
-============================================================================*/
-/* if (document.readyState === "complete") {
-   init();
-} else {
-   window.addEventListener("load", init);
-}
-
-function init() {
-   function onEntry(entry) {
-      entry.forEach(change => {
-         if (change.isIntersecting) {
-            change.target.classList.add('element-show');
-         }
-      });
-   }
-
-   let options = { threshold: [0.4] };
-   let observer = new IntersectionObserver(onEntry, options);
-   let elements = document.querySelectorAll('.element-animation');
-   for (let elm of elements) {
-      observer.observe(elm);
-   }
-} */
 
 /*==========================================================================
 Fix header
@@ -3279,13 +3252,34 @@ if (marqueSlider) {
    });
 }
 
-
 /*==========================================================================
 Cookie
 ============================================================================*/
 document.addEventListener('DOMContentLoaded', () => {
+
+   const COOKIE_NAME = 'cookiesAccepted';
+
+   function setCookie(name, value, days = 365) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+   }
+
+   function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? match[2] : null;
+   }
+
+   const cookiesWrapper = document.querySelector('.cookies');
+   if (!cookiesWrapper) return;
+
+   if (!getCookie(COOKIE_NAME)) {
+      cookiesWrapper.style.display = 'block';
+   }
+
    // ===== Аккордеон =====
    const cookieSettings = document.querySelectorAll('.cookies__setting');
+
    if (cookieSettings.length) {
       cookieSettings.forEach(setting => {
          const title = setting.querySelector('.cookies__setting-title');
@@ -3313,50 +3307,68 @@ document.addEventListener('DOMContentLoaded', () => {
       });
    }
 
-   // ===== Открытие настроек=====
-   const cookiesWrapper = document.querySelector('.cookies');
+   // ===== Переключение настроек =====
    const banner = document.querySelector('.cookies__att');
    const settingsBlock = document.querySelector('.cookies__settings');
    const buttons = document.querySelectorAll('.cookies__settings-btn');
 
-   if (!banner || !settingsBlock || !buttons.length || !cookiesWrapper) return;
+   if (banner && settingsBlock && buttons.length) {
 
-   banner.style.display = 'block';
-   banner.style.opacity = '1';
-   banner.style.transition = 'opacity 0.3s ease';
-   settingsBlock.style.display = 'none';
-   settingsBlock.style.opacity = '0';
-   settingsBlock.style.transition = 'opacity 0.3s ease';
+      banner.style.opacity = '1';
+      banner.style.transition = 'opacity 0.3s ease';
 
-   buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-         if (banner.style.display !== 'none') {
-            banner.style.opacity = '0';
-            setTimeout(() => {
-               banner.style.display = 'none';
-               settingsBlock.style.display = 'block';
-               setTimeout(() => settingsBlock.style.opacity = '1', 10);
-            }, 300);
-         } else {
-            settingsBlock.style.opacity = '0';
-            setTimeout(() => {
-               settingsBlock.style.display = 'none';
-               banner.style.display = 'block';
-               setTimeout(() => banner.style.opacity = '1', 10);
-            }, 300);
-         }
+      settingsBlock.style.display = 'none';
+      settingsBlock.style.opacity = '0';
+      settingsBlock.style.transition = 'opacity 0.3s ease';
+
+      buttons.forEach(btn => {
+         btn.addEventListener('click', () => {
+
+            if (banner.style.display !== 'none') {
+
+               banner.style.opacity = '0';
+
+               setTimeout(() => {
+                  banner.style.display = 'none';
+                  settingsBlock.style.display = 'block';
+
+                  setTimeout(() => {
+                     settingsBlock.style.opacity = '1';
+                  }, 10);
+
+               }, 300);
+
+            } else {
+
+               settingsBlock.style.opacity = '0';
+
+               setTimeout(() => {
+                  settingsBlock.style.display = 'none';
+                  banner.style.display = 'block';
+
+                  setTimeout(() => {
+                     banner.style.opacity = '1';
+                  }, 10);
+
+               }, 300);
+
+            }
+
+         });
       });
-   });
+   }
 
-   // ===== Тестовое закрытие =====
+   // ===== Accept / Reject =====
    const actionButtons = cookiesWrapper.querySelectorAll('.cookies__apply, .cookies__reject');
+
    actionButtons.forEach(btn => {
       btn.addEventListener('click', () => {
+         setCookie(COOKIE_NAME, 'true', 365);
          cookiesWrapper.style.display = 'none';
       });
    });
-});
 
+});
 
 /*==========================================================================
 Init
