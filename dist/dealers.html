@@ -36,13 +36,14 @@
       </a>
       <div class="header__menu menu">
          <div class="menu__home">
-            <a href="index.html" class="menu__link">Главная</a>
+            <a href="index.html" class="menu__link smooth" data-radius="15" data-smooth="0.6">Главная</a>
          </div>
          <div class="menu__catalog">
-            <a href="catalog.html" class="menu__catalog-link">Каталог</a>
+            <a href="catalog.html" class="menu__catalog-link smooth" data-radius="15" data-smooth="0.6">Каталог</a>
          </div>
          <div class="menu__search">
-            <button type="button" class="menu__search-button open-popup" data-popup="search-popup">
+            <button type="button" class="menu__search-button open-popup smooth" data-radius="15" data-smooth="0.6"
+               data-popup="search-popup">
                <div class="menu__search-icon">
                   <svg>
                      <use xlink:href="img/icons/icons.svg#icon-search"></use>
@@ -55,16 +56,16 @@
          <div class="menu__body">
             <ul class="menu__list">
                <li class="menu__item">
-                  <a href="catalog.html" class="menu__link">Каталог</a>
+                  <a href="catalog.html" class="menu__link smooth" data-radius="15" data-smooth="0.6">Каталог</a>
                </li>
                <li class="menu__item">
-                  <a href="news.html" class="menu__link">Новости</a>
+                  <a href="news.html" class="menu__link smooth" data-radius="15" data-smooth="0.6">Новости</a>
                </li>
                <li class="menu__item">
-                  <a href="dealers.html" class="menu__link">Где купить</a>
+                  <a href="dealers.html" class="menu__link smooth" data-radius="15" data-smooth="0.6">Где купить</a>
                </li>
                <li class="menu__item">
-                  <a href="support.html" class="menu__link">Поддержка</a>
+                  <a href="support.html" class="menu__link smooth" data-radius="15" data-smooth="0.6">Поддержка</a>
                </li>
             </ul>
          </div>
@@ -389,19 +390,19 @@
                <div class="footer__menu">
                   <ul class="footer__menu-list">
                      <li class="footer__menu-item">
-                        <a href="" class="footer__menu-link">Главная</a>
+                        <a href="index.html" class="footer__menu-link">Главная</a>
                      </li>
                      <li class="footer__menu-item">
-                        <a href="" class="footer__menu-link">Каталог</a>
+                        <a href="catalog.html" class="footer__menu-link">Каталог</a>
                      </li>
                      <li class="footer__menu-item">
-                        <a href="" class="footer__menu-link">Новости</a>
+                        <a href="news.html" class="footer__menu-link">Новости</a>
                      </li>
                      <li class="footer__menu-item">
-                        <a href="" class="footer__menu-link">Где купить</a>
+                        <a href="dealers.html" class="footer__menu-link">Где купить</a>
                      </li>
                      <li class="footer__menu-item">
-                        <a href="" class="footer__menu-link">Поддержка</a>
+                        <a href="support.html" class="footer__menu-link">Поддержка</a>
                      </li>
                   </ul>
                </div>
@@ -414,7 +415,7 @@
             <img src="img/tola-logo.svg" width="80" height="41" alt="Tola logo">
             <p>Сайт разработан <a href="https://tolacompany.ru/">TOLACOMPANY.RU</a></p>
          </div>
-         <a href="" class="footer__legal-link">Политика конфиденциальности</a>
+         <a href="privacy-policy.html" class="footer__legal-link">Политика конфиденциальности</a>
          <a href="" class="footer__legal-link">Политика обработки персональных данных</a>
          <div class="footer__go-top">
             <button type="button" class="footer__go-top-btn" aria-label="Вернуться вверх">
@@ -427,6 +428,198 @@
    </div>
 </footer>
    </div>
+   <!--Search popup-->
+<div id="search-popup" class="search-popup popup" role="dialog" aria-modal="true">
+   <div class="search-popup__body popup__body " data-radius="26" data-smooth="1">
+      <search class="search-popup__main">
+         <form action="" class="search-popup__form">
+            <div class="search-popup__area">
+               <input type="search" placeholder="Что ищите?" required>
+            </div>
+            <button type="submit" class="search-popup__submit">
+               <span>Найти</span>
+               <svg>
+                  <use xlink:href="img/icons/icons.svg#icon-search"></use>
+               </svg>
+            </button>
+         </form>
+         <div class="search-popup__results">
+            <a href="" class="button">Freezer 36 Black</a>
+            <a href="" class="button">Термопаста</a>
+            <a href="" class="button">P12 Pro Reverse</a>
+            <a href="" class="button">Корпусный вентилятор</a>
+         </div>
+      </search>
+
+      <div class="search-popup__catalog">
+         <div class="search-popup__aside">
+            <div class="search-popup__group">
+               <div class="search-popup__group-title">
+                  <img src="img/icons/search.svg" width="18" height="18" alt="icon">
+                  Часто ищут
+               </div>
+               <div class="search-popup__links">
+                  <a href="">вентилятор
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">куллер
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">корпус Arctic
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+               </div>
+            </div>
+
+            <div class="search-popup__group">
+               <div class="search-popup__group-title">
+                  <img src="img/icons/layer-group.svg" width="18" height="18" alt="icon">
+                  Категории
+               </div>
+               <div class="search-popup__links">
+                  <a href="">Куллеры для процессоров
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Системы жидкостного охлаждения
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Корпусные вентиляторы
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Термоинтерфейсы
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Кронштейны
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Корпусы
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Аксессуары
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+                  <a href="">Архив моделей
+                     <svg>
+                        <use xlink:href="img/icons/icons.svg#icon-arrow-diagonal"></use>
+                     </svg>
+                  </a>
+               </div>
+            </div>
+         </div>
+
+         <div class="search-popup__products">
+            <div class="search-popup__products-wrapper">
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+
+               <a href="product.html" class="product-preview">
+                  <div class="product-preview__image">
+                     <img src="img/products/prev-1.png" alt="">
+                  </div>
+                  <div class="product-preview__info">
+                     <div class="product-preview__name">Freezer 36 Black</div>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </div>
+
+      <button class="search-popup__close popup__close close-icon">
+         <svg>
+            <use xlink:href="img/icons/icons.svg#icon-close"></use>
+         </svg>
+      </button>
+   </div>
+</div>
    
 
    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
