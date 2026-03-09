@@ -407,6 +407,11 @@ Form elements
   border-color: transparent;
   background: rgba(255, 255, 255, 0.05);
 }
+@media (hover: hover) {
+  .dropdown.dropdown--selected .dropdown__button:hover {
+    background: rgba(40, 246, 188, 0.1);
+  }
+}
 @media (width < 600px) {
   .dropdown::after {
     content: "";
@@ -440,7 +445,7 @@ Form elements
   background: rgba(255, 255, 255, 0.05);
   height: 65px;
   border: 1px solid transparent;
-  transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0s linear 0.3s;
+  transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0s linear 0s;
   color: rgba(255, 255, 255, 0.3);
   white-space: nowrap;
 }
@@ -484,12 +489,14 @@ Form elements
   border-radius: 0 0 12px 12px;
   overflow: hidden;
   transform-origin: top;
-  transform: scaleY(0);
+  transform: translateY(10px);
+  opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .dropdown__list.show {
-  transform: scaleY(1);
+  opacity: 1;
+  transform: translateY(0);
   pointer-events: all;
 }
 @media (width < 600px) {
@@ -564,6 +571,8 @@ Form elements
   width: 0;
   height: 0;
   position: absolute;
+  display: none;
+  background: transparent;
 }
 .dropdown__item:not(:last-child) {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -787,6 +796,11 @@ Header
 }
 .header .menu__home {
   display: none;
+}
+@media (width < 1000px) {
+  .header .menu__home {
+    display: none !important;
+  }
 }
 .header.-fx {
   position: fixed;
@@ -2130,7 +2144,6 @@ Carousel
 }
 .product-preview__image {
   width: 100%;
-  height: auto;
   aspect-ratio: 1/1;
   padding: 26px;
   display: flex;
@@ -2531,10 +2544,6 @@ FAQ
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.faq__item.active .faq__answer-wrapper {
-  transform: translateY(0);
-  opacity: 1;
-}
 .faq__item.active .faq__question-icon {
   background: rgba(40, 246, 188, 0.1);
   color: var(--color-primary);
@@ -2621,8 +2630,6 @@ FAQ
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .faq__answer-wrapper {
-  opacity: 0;
-  transform: translateY(-8px);
   padding: 24px 42px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 16px;
@@ -2664,6 +2671,8 @@ Request
 ============================================================================*/
 .request {
   background: #0f1015;
+  position: relative;
+  z-index: 5;
 }
 .request__body {
   padding-top: 90px;
@@ -2783,8 +2792,7 @@ Request
   position: relative;
 }
 .request__form-area:has(input:focus, textarea:focus) .request__form-label {
-  font-size: 10px;
-  transform: translateY(-100%);
+  transform: translateY(-80%) scale(0.7);
   color: var(--color-primary);
 }
 .request__form-area:has(input:focus, textarea:focus) .request__form-error {
@@ -2814,8 +2822,7 @@ Request
   color: #ff0014;
 }
 .request__form-area.has-value .request__form-label {
-  font-size: 10px;
-  transform: translateY(-100%);
+  transform: translateY(-80%) scale(0.7);
   color: rgba(255, 255, 255, 0.5);
 }
 .request__form-error {
@@ -2841,6 +2848,8 @@ Request
   letter-spacing: -0.01em;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: left;
+  will-change: transform;
 }
 @media (width < 767px) {
   .request__form-label {
@@ -2941,7 +2950,7 @@ Catalog
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media (width < 767px) {
+@media (width < 880px) {
   .catalog__items {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -2965,7 +2974,6 @@ Catalog
 }
 .category-preview__image {
   width: 100%;
-  height: auto;
   aspect-ratio: 1/1;
   padding: 26px;
   display: flex;
@@ -3972,6 +3980,7 @@ Product video
   .product__model {
     height: 335px;
     margin-top: 20px;
+    padding: 20px;
   }
 }
 .product__model-label {
@@ -3989,9 +3998,8 @@ Product video
 }
 @media (width < 600px) {
   .product__model-label {
+    position: static;
     font-size: 18px;
-    top: 20px;
-    left: 20px;
   }
 }
 .product__model-wrapper {
@@ -4006,7 +4014,7 @@ Product video
 }
 @media (width < 600px) {
   .product__model-viewer {
-    height: 335px;
+    height: 300px;
   }
 }
 
@@ -4289,7 +4297,7 @@ News
   flex-direction: column;
   gap: 4px;
   flex-wrap: wrap;
-  z-index: 3;
+  z-index: 10;
 }
 @media (width < 600px) {
   .article-preview__tags {
@@ -4754,11 +4762,6 @@ Dealers
   z-index: 3;
   background: linear-gradient(270deg, #0f1015 0%, transparent 100%);
 }
-@media (width < 600px) {
-  .dealers__marque {
-    display: none;
-  }
-}
 .dealers__slider {
   padding: 60px 0;
 }
@@ -4785,6 +4788,12 @@ Dealers
 @media (width < 767px) {
   .dealers__slide {
     max-width: 170px;
+  }
+}
+@media (width < 600px) {
+  .dealers__slide {
+    max-width: 100px;
+    max-height: 60px;
   }
 }
 

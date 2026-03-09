@@ -2727,6 +2727,7 @@ function heroSlider() {
       parallax: true,
       pagination: {
          el: '.hero__pagination',
+         clickable: true,
       },
       autoplay: {
          delay: 5000,
@@ -2743,16 +2744,23 @@ function initHotspots() {
    const hotspots = document.querySelectorAll('.hotspot');
    if (!hotspots.length) return;
 
+   const singleOpenBreakpoint = 880;
    const mobileBreakpoint = 767;
 
    function setDefaultState() {
-      const isMobile = window.innerWidth <= mobileBreakpoint;
+      const width = window.innerWidth;
 
-      hotspots.forEach(hotspot => {
+      hotspots.forEach((hotspot, index) => {
          const card = hotspot.querySelector('.hotspot__card');
          if (!card) return;
 
-         card.classList.toggle('show', !isMobile);
+         if (width > singleOpenBreakpoint) {
+            card.classList.add('show');
+         } else if (width > mobileBreakpoint) {
+            card.classList.toggle('show', index === 0);
+         } else {
+            card.classList.remove('show');
+         }
       });
    }
 
@@ -2762,9 +2770,9 @@ function initHotspots() {
       if (!dot || !card) return;
 
       dot.addEventListener('click', () => {
-         const isMobile = window.innerWidth <= mobileBreakpoint;
+         const width = window.innerWidth;
 
-         if (isMobile) {
+         if (width <= singleOpenBreakpoint) {
             hotspots.forEach(h => {
                const c = h.querySelector('.hotspot__card');
                if (c && c !== card) {
@@ -2780,7 +2788,6 @@ function initHotspots() {
    setDefaultState();
    window.addEventListener('resize', setDefaultState);
 }
-
 
 /*==========================================================================
 Products slider
