@@ -2833,6 +2833,10 @@ function initProductsCarousel() {
             1200: {
                slidesPerView: 4,
                spaceBetween: 26,
+            },
+            2000: {
+               slidesPerView: 5,
+               spaceBetween: 26,
             }
          }
       });
@@ -3232,6 +3236,10 @@ function initGallerySlider() {
             1200: {
                slidesPerView: 3,
                spaceBetween: 26,
+            },
+            2000: {
+               slidesPerView: 4,
+               spaceBetween: 26,
             }
          }
       });
@@ -3250,21 +3258,34 @@ const marqueSlider = document.querySelector(".dealers__slider");
 
 if (marqueSlider) {
    const brandsSwiper = new Swiper(marqueSlider, {
-      slidesPerView: "auto",
+      slidesPerView: 8,
       spaceBetween: 60,
       loop: true,
-
-      speed: 4000,
-
+      speed: 3000,
       freeMode: true,
       freeModeMomentum: false,
-
       allowTouchMove: false,
-
       autoplay: {
          delay: 0,
          disableOnInteraction: false,
       },
+      breakpoints: {
+         320: {
+            slidesPerView: 3,
+         },
+         600: {
+            slidesPerView: 5,
+         },
+         900: {
+            slidesPerView: 6,
+         },
+         1200: {
+            slidesPerView: 7,
+         },
+         2000: {
+            slidesPerView: 8,
+         }
+      }
    });
 }
 

@@ -219,8 +219,13 @@ main {
 }
 
 .container {
-  width: min(100% - 52px, var(--container-width));
+  width: min(100% - 150px, 1800px);
   margin-inline: auto;
+}
+@media (width < 2000px) {
+  .container {
+    width: min(100% - 52px, var(--container-width));
+  }
 }
 @media (width < 767px) {
   .container {
@@ -1655,6 +1660,11 @@ Hero
   z-index: 5;
   text-align: left;
 }
+@media (width > 2000px) {
+  .hero__text-wrapper {
+    top: 180px;
+  }
+}
 @media (width < 880px) {
   .hero__text-wrapper {
     top: 90px;
@@ -1802,6 +1812,11 @@ Hero
   padding: 6px;
   border-radius: 20px;
 }
+@media (width > 2000px) {
+  .hotspot.hotspot-col .hotspot__card {
+    width: 180px;
+  }
+}
 .hotspot.hotspot-col .hotspot__triangle {
   right: unset;
   left: 14px;
@@ -1813,6 +1828,20 @@ Hero
 .hotspot.hotspot-col .hotspot__card-name {
   font-weight: 400;
   font-size: 16px;
+}
+@media (width > 2000px) {
+  .hotspot.hotspot-col .hotspot__card-name {
+    font-size: 20px;
+  }
+}
+@media (width > 2000px) {
+  .hotspot.hotspot-col .hotspot__card-button {
+    display: flex;
+    justify-content: center;
+  }
+  .hotspot.hotspot-col .hotspot__card-button a {
+    width: 100%;
+  }
 }
 .hotspot__dot {
   width: 48px;
@@ -1862,6 +1891,11 @@ Hero
   opacity: 1;
   visibility: visible;
 }
+@media (width > 2000px) {
+  .hotspot__card {
+    width: 480px;
+  }
+}
 @media (width < 767px) {
   .hotspot__card {
     gap: 10px;
@@ -1902,12 +1936,24 @@ Hero
   height: 100%;
   object-fit: contain;
 }
+@media (width > 1200px) {
+  .hotspot__card-image {
+    flex: 0 0 140px;
+    width: 140px;
+    height: 140px;
+  }
+}
 .hotspot__card-name {
   font-size: 18px;
   font-weight: 500;
   line-height: 120%;
   letter-spacing: -0.02em;
   margin-bottom: 5px;
+}
+@media (width > 2000px) {
+  .hotspot__card-name {
+    font-size: 24px;
+  }
 }
 @media (width < 767px) {
   .hotspot__card-name {
@@ -1921,6 +1967,11 @@ Hero
   letter-spacing: -0.02em;
   opacity: 0.4;
   margin-bottom: 10px;
+}
+@media (width > 2000px) {
+  .hotspot__card-descr {
+    font-size: 16px;
+  }
 }
 .hotspot__card-button a {
   padding: 8px 16px;
@@ -1940,6 +1991,12 @@ Hero
   .hotspot__card-button a:hover {
     background: var(--color-primary);
     color: #0f1015;
+  }
+}
+@media (width > 2000px) {
+  .hotspot__card-button a {
+    font-size: 18px;
+    height: auto;
   }
 }
 
@@ -2110,11 +2167,17 @@ Carousel
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  padding-left: calc((100vw - 1246px) / 2);
-  padding-right: calc((100vw - 1246px) / 2);
+  padding-left: calc((100vw - 1800px) / 2);
+  padding-right: calc((100vw - 1800px) / 2);
 }
 .carousel__slider .swiper-wrapper {
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+@media (width < 2000px) {
+  .carousel__slider {
+    padding-left: calc((100vw - 1246px) / 2);
+    padding-right: calc((100vw - 1246px) / 2);
+  }
 }
 @media (width < 1300px) {
   .carousel__slider {
@@ -2255,6 +2318,11 @@ Goal
     text-wrap: balance;
   }
 }
+@media (width > 2000px) {
+  .goal__text {
+    font-size: 20px;
+  }
+}
 @media (width < 1000px) {
   .goal__text {
     display: grid;
@@ -2290,6 +2358,11 @@ Goal
   max-width: 504px;
   margin-left: auto;
 }
+@media (width > 2000px) {
+  .goal__item {
+    max-width: 26vw;
+  }
+}
 @media (width < 1000px) {
   .goal__item:last-child {
     grid-column: 1/-1;
@@ -2316,6 +2389,12 @@ Goal
   background: linear-gradient(300deg, #28f6bc 41%, #115f49 100%);
   opacity: 0.15;
   z-index: -1;
+  pointer-events: none;
+}
+@media (width > 2000px) {
+  .goal__advantage {
+    padding-left: 60px;
+  }
 }
 @media (width < 1000px) {
   .goal__advantage {
@@ -2361,16 +2440,27 @@ Goal
   letter-spacing: -0.01em;
   margin-bottom: 5px;
 }
+@media (width > 2000px) {
+  .goal__advantage-text-name {
+    font-size: 24px;
+  }
+}
 .goal__advantage-text-descr {
   font-size: 12px;
   line-height: 130%;
   letter-spacing: -0.02em;
+}
+@media (width > 2000px) {
+  .goal__advantage-text-descr {
+    font-size: 18px;
+  }
 }
 .goal__image {
   position: relative;
   width: 100%;
   z-index: 5;
   margin-top: -300px;
+  pointer-events: none;
 }
 .goal__image img {
   width: 100%;
@@ -2548,6 +2638,7 @@ FAQ
   }
 }
 .faq__items-col {
+  flex: 0 1 50%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -3191,6 +3282,11 @@ Category
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px 26px;
+}
+@media (width > 2000px) {
+  .category__grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 @media (width < 1200px) {
   .category__grid {
@@ -3903,19 +3999,6 @@ Product video
 }
 .video-player video {
   width: 100%;
-  height: 100%;
-  min-height: 450px;
-  object-fit: cover;
-}
-@media (width < 1000px) {
-  .video-player video {
-    min-height: 320px;
-  }
-}
-@media (width < 600px) {
-  .video-player video {
-    min-height: 240px;
-  }
 }
 .video-player__poster {
   position: absolute;
@@ -4494,8 +4577,14 @@ Article page
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  padding-left: calc((100vw - 1246px) / 2);
-  padding-right: calc((100vw - 1246px) / 2);
+  padding-left: calc((100vw - 1800px) / 2);
+  padding-right: calc((100vw - 1800px) / 2);
+}
+@media (width < 2000px) {
+  .article__gallery-slider {
+    padding-left: calc((100vw - 1246px) / 2);
+    padding-right: calc((100vw - 1246px) / 2);
+  }
 }
 .article__gallery-slider .swiper-wrapper {
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
@@ -4562,6 +4651,11 @@ Article video
 .article__video-wrapper {
   flex: 0 1 822px;
 }
+@media (width > 2000px) {
+  .article__video-wrapper {
+    flex: 0 1 50%;
+  }
+}
 @media (width < 1000px) {
   .article__video-wrapper {
     flex: 1 1 auto;
@@ -4572,6 +4666,11 @@ Article video
   padding: 24px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.02);
+}
+@media (width > 2000px) {
+  .article__video-card {
+    flex: 0 1 50%;
+  }
 }
 @media (width < 1000px) {
   .article__video-card {
@@ -4757,6 +4856,7 @@ Dealers
 .dealers__marque {
   overflow: hidden;
   position: relative;
+  pointer-events: none;
 }
 .dealers__marque::before {
   content: "";
