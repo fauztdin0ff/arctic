@@ -2576,6 +2576,31 @@ Offer
   line-height: 120%;
   margin-bottom: 5px;
 }
+.offer__card-head-marketplaces {
+  display: flex;
+}
+.offer__card-head-marketplace {
+  display: flex;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 4px solid #191a1e;
+  border-radius: 50%;
+}
+@media (hover: hover) {
+  .offer__card-head-marketplace:hover {
+    transform: translateY(-6px);
+  }
+}
+.offer__card-head-marketplace:nth-child(1) {
+  z-index: 3;
+}
+.offer__card-head-marketplace:nth-child(2) {
+  margin-left: -15px;
+  z-index: 2;
+}
+.offer__card-head-marketplace:nth-child(3) {
+  margin-left: -15px;
+  z-index: 1;
+}
 .offer__card-head-descr {
   font-size: 14px;
   line-height: 140%;
