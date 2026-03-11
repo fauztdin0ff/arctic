@@ -4774,10 +4774,10 @@ Dealers
 }
 .dealers__slider {
   padding: 60px 0;
-  transition-timing-function: linear !important;
 }
 .dealers__slider .swiper-wrapper {
   transition-timing-function: linear !important;
+  will-change: transform;
 }
 @media (width < 767px) {
   .dealers__slider {
@@ -4795,7 +4795,7 @@ Dealers
   justify-content: center;
   width: auto;
   height: auto;
-  transition-timing-function: linear !important;
+  transform: translateZ(0);
 }
 @media (width < 767px) {
   .dealers__slide {
