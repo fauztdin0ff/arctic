@@ -129,17 +129,24 @@ input[type=number]::-ms-expand {
 }
 
 @font-face {
-  font-family: TTFirsNeue;
+  font-family: Manrope;
   font-display: swap;
-  src: url("../fonts/TTFirsNeue-Regular.woff2") format("woff2"), url("../fonts/TTFirsNeue-Regular.woff") format("woff");
+  src: url("../fonts/Manrope-Medium.woff2") format("woff2"), url("../fonts/Manrope-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: Manrope;
+  font-display: swap;
+  src: url("../fonts/Manrope-Regular.woff2") format("woff2"), url("../fonts/Manrope-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: TTFirsNeue;
+  font-family: Manrope;
   font-display: swap;
-  src: url("../fonts/TTFirsNeue-Medium.woff2") format("woff2"), url("../fonts/TTFirsNeue-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../fonts/Manrope-SemiBold.woff2") format("woff2"), url("../fonts/Manrope-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 /*==========================================================================
@@ -149,7 +156,7 @@ Vars
   --color-main-bg: #0f1015;
   --color-text: #fff;
   --color-primary: #28f6bc;
-  --font-main: "TTFirsNeue", sans-serif;
+  --font-main: "Manrope", sans-serif;
   --font-size-base: 16px;
   --font-line-height: 140%;
   --container-width: 1246px;
