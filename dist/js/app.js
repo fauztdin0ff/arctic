@@ -3253,11 +3253,14 @@ if (marqueSlider) {
       slidesPerView: "auto",
       spaceBetween: 60,
       loop: true,
+
+      speed: 4000,
+
       freeMode: true,
       freeModeMomentum: false,
-      simulateTouch: false,
-      slideToClickedSlide: false,
-      speed: 3000,
+
+      allowTouchMove: false,
+
       autoplay: {
          delay: 0,
          disableOnInteraction: false,
