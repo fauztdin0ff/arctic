@@ -2812,6 +2812,11 @@ function initProductsCarousel() {
             prevEl,
             nextEl,
          },
+         mousewheel: {
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+         },
          breakpoints: {
             320: {
                slidesPerView: 1.05,
@@ -3248,7 +3253,7 @@ if (marqueSlider) {
       slidesPerView: "auto",
       spaceBetween: 60,
       loop: true,
-      freeMode: true,
+      freeMode: false,
       simulateTouch: false,
       slideToClickedSlide: false,
       speed: 3000,

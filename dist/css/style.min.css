@@ -2161,10 +2161,12 @@ Carousel
   margin-bottom: 15px;
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   border: 1px solid transparent;
+  overflow: hidden;
 }
 .product-preview__image img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1/1;
+  height: unset;
   object-fit: contain;
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -2994,7 +2996,8 @@ Catalog
 }
 .category-preview__image img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1/1;
+  height: unset;
   object-fit: contain;
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4771,6 +4774,7 @@ Dealers
 }
 .dealers__slider {
   padding: 60px 0;
+  transition-timing-function: linear !important;
 }
 .dealers__slider .swiper-wrapper {
   transition-timing-function: linear !important;
@@ -4791,6 +4795,7 @@ Dealers
   justify-content: center;
   width: auto;
   height: auto;
+  transition-timing-function: linear !important;
 }
 @media (width < 767px) {
   .dealers__slide {
