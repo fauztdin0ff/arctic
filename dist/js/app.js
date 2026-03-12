@@ -3216,6 +3216,11 @@ function initGallerySlider() {
          loop: false,
          spaceBetween: 10,
          speed: 600,
+         mousewheel: {
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+         },
          navigation: {
             prevEl: prev,
             nextEl: next,
