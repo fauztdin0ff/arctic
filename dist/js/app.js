@@ -3216,6 +3216,7 @@ function initGallerySlider() {
          loop: false,
          spaceBetween: 10,
          speed: 600,
+         watchSlidesProgress: true,
          mousewheel: {
             forceToAxis: true,
             sensitivity: 1,
