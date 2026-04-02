@@ -3949,6 +3949,7 @@ Product
   font-size: 24px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.5);
+  z-index: 5;
 }
 @media (width < 767px) {
   .reviews .reviews__image--more::after {
