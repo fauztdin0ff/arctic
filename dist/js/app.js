@@ -3419,132 +3419,38 @@ Reviews images
 ============================================================================*/
 function initReviewImages(scope = document) {
    const wrappers = scope.querySelectorAll('.reviews__images-wrapper');
-   if (!wrappers.length) return;
 
    wrappers.forEach(wrapper => {
       const items = Array.from(wrapper.querySelectorAll('.reviews__image'));
       if (!items.length) return;
 
-      items.forEach(item => {
-         item.style.display = '';
-         item.classList.remove('has-more');
-         item.removeAttribute('data-more');
+      items.forEach(el => {
+         el.style.display = '';
+         el.classList.remove('reviews__image--more');
+         el.removeAttribute('data-more');
       });
 
-      const wrapperWidth = wrapper.clientWidth;
-      const itemWidth = items[0].offsetWidth;
+      const styles = getComputedStyle(wrapper);
+      const columns = styles.gridTemplateColumns.split(' ').length;
 
-      const style = getComputedStyle(wrapper);
-      const gap = parseFloat(style.gap) || 0;
+      const visibleCount = Math.min(columns, items.length);
 
-      const fitCount = Math.floor(wrapperWidth / (itemWidth + gap));
+      if (items.length <= visibleCount) return;
 
-      const visibleCount = Math.min(fitCount, items.length);
-      const hiddenCount = items.length - visibleCount;
-
-      if (visibleCount <= 0 || hiddenCount <= 0) return;
-
-      items.forEach((item, index) => {
+      items.forEach((el, index) => {
          if (index >= visibleCount) {
-            item.style.display = 'none';
+            el.style.display = 'none';
          }
       });
 
+      const hiddenCount = items.length - visibleCount;
       const lastVisible = items[visibleCount - 1];
-
-      if (!lastVisible) return;
-
-      lastVisible.classList.add('has-more');
+      lastVisible.classList.add('reviews__image--more');
       lastVisible.setAttribute('data-more', `+${hiddenCount}`);
    });
 }
 
-
-
-/*==========================================================================
-Reviews tabs
-============================================================================*/
-function initReviewsTabs() {
-   const tabsWrapper = document.querySelector('.reviews__tabs');
-   if (!tabsWrapper) return;
-
-   const tabs = tabsWrapper.querySelectorAll('.reviews__tab');
-   const groups = document.querySelectorAll('.reviews__group');
-   const thumb = tabsWrapper.querySelector('.reviews__tab-thumb');
-
-   let activeTab = tabsWrapper.querySelector('.reviews__tab.active') || tabs[0];
-   let activeGroup = document.querySelector(`.reviews__group[data-group="${activeTab.dataset.tab}"]`);
-
-   groups.forEach(group => {
-      group.style.display = 'none';
-      group.style.opacity = '0';
-   });
-
-   if (activeGroup) {
-      activeGroup.style.display = 'block';
-      requestAnimationFrame(() => {
-         activeGroup.style.opacity = '1';
-      });
-   }
-
-   moveThumb(activeTab);
-
-   tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-         if (tab === activeTab) return;
-
-         const nextGroup = document.querySelector(`.reviews__group[data-group="${tab.dataset.tab}"]`);
-         if (!nextGroup) return;
-
-         activeGroup.style.opacity = '0';
-
-         setTimeout(() => {
-            activeGroup.style.display = 'none';
-
-            nextGroup.style.display = 'block';
-
-            requestAnimationFrame(() => {
-               nextGroup.style.opacity = '1';
-
-               initReviewImages();
-            });
-
-            activeGroup = nextGroup;
-         }, 200);
-
-         activeTab.classList.remove('active');
-         tab.classList.add('active');
-         activeTab = tab;
-
-         moveThumb(tab);
-      });
-   });
-
-   function moveThumb(tab) {
-      const isMobile = window.matchMedia('(max-width: 600px)').matches;
-
-      const tabRect = tab.getBoundingClientRect();
-      const wrapperRect = tabsWrapper.getBoundingClientRect();
-
-      if (isMobile) {
-         const top = tabRect.top - wrapperRect.top;
-         const height = tabRect.height;
-
-         thumb.style.transform = `translateY(${top}px)`;
-         thumb.style.width = `100%`;
-         thumb.style.height = `${height}px`;
-      } else {
-         const left = tabRect.left - wrapperRect.left;
-         const width = tabRect.width;
-
-         thumb.style.transform = `translateX(${left}px)`;
-         thumb.style.width = `${width}px`;
-         thumb.style.height = `100%`;
-      }
-   }
-}
-
-
+window.addEventListener('resize', () => initReviewImages());
 /*==========================================================================
 Init
 ============================================================================*/
@@ -3561,8 +3467,9 @@ document.addEventListener("DOMContentLoaded", () => {
    initVideoPlayers();
    initGallerySlider();
    initReviewImages();
-   initReviewsTabs();
 })
+
+
 })();
 
 /******/ })()
