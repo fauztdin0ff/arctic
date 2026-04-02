@@ -4065,6 +4065,9 @@ Product
 .reviews__item-action.--dislike {
   color: #e35e5e;
 }
+.reviews__item-action.--dislike svg {
+  transform: rotate(-180deg);
+}
 .reviews__item-like, .reviews__item-dislike {
   width: 20px;
   height: 20px;
