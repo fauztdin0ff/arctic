@@ -2725,6 +2725,10 @@ function heroSlider() {
       spaceBetween: 20,
       effect: 'fade',
       parallax: true,
+      navigation: {
+         prevEl: '.hero__slider-prev',
+         nextEl: '.hero__slider-next',
+      },
       pagination: {
          el: '.hero__pagination',
          clickable: true,
