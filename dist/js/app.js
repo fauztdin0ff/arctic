@@ -3156,7 +3156,11 @@ function initProductGallerySlider() {
    const productSwiperThumbs = new Swiper(productGallerySliderThumbs, {
       spaceBetween: 10,
       speed: 600,
-      slidesPerView: 5
+      slidesPerView: 5,
+      navigation: {
+         prevEl: '.product__thumb-prev',
+         nextEl: '.product__thumb-next',
+      }
    });
 
    const productSwiperBig = new Swiper(productGallerySliderBig, {
