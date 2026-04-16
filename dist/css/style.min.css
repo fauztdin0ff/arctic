@@ -1759,7 +1759,7 @@ Hero
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.1);
   color: #908f8f;
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   user-select: none;
