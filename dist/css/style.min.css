@@ -3418,10 +3418,22 @@ Category
 }
 .filter-toggle__image {
   flex: 0 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.filter-toggle__image svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-primary);
 }
 @media (width < 600px) {
   .filter-toggle__image {
     flex: 0 0 14px;
+  }
+  .filter-toggle__image svg {
+    width: 14px;
+    height: 14px;
   }
 }
 .filter-toggle__text {
